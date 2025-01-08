@@ -15,11 +15,10 @@ import repo_test
 def main():
     # Check on vivado
     tester = test_suite_320.build_test_suite_320("lab02", start_date="01/20/2025")
-    tester.add_Makefile_rule("sim_adder", ["sim_adder.tcl"], ["sim_adder.log"])
+    tester.add_required_tracked_files(["sim_waveform.png", "pre-synth-schematic.png", "post-synth-schematic.png", "implementation.png"])
     tester.add_Makefile_rule("synth_adder", ["synth_adder.tcl"], ["synth_adder.log", "binary_adder_synth.dcp"])
     tester.add_Makefile_rule("implement_adder", ["implement_adder.tcl"], ["implement_adder.log", "binary_adder.bit", 
                                                                           "binary_adder.dcp", "utilization.rpt"])
-    tester.add_required_tracked_files(["sim_waveform.png", "schematic.png"])
     
     tester.run_tests()
 

@@ -15,10 +15,13 @@ import repo_test
 def main():
     # Check on vivado
     tester = test_suite_320.build_test_suite_320("lab03", start_date="01/27/2025")
-    tester.add_Makefile_rule("sim_adder", ["sim_adder.tcl"], ["sim_adder.log"])
-    tester.add_Makefile_rule("synth_adder", ["synth_adder.tcl"], ["synth_adder.log", "binary_adder_synth.dcp"])
-    tester.add_Makefile_rule("implement_adder", ["implement_adder.tcl"], ["implement_adder.log", "binary_adder.bit", 
-                                                                          "binary_adder.dcp", "utilization.rpt"])
+    tester.add_required_tracked_files(["pre-synth-schematic.png", "sim_logic.tcl", 
+        "sim_logic.png", "post-synth-schematic.png", "implementation.png"])
+    tester.add_Makefile_rule("sim_tb")
+    tester.add_Makefile_rule("synth_logic", ["synth_logic.tcl"],
+        ["synth_logic.log", "logic_functions_synth.dcp"])
+    tester.add_Makefile_rule("implement_logic", ["implement_logic.tcl"], 
+        ["implement_logic.log", "logic_functions.bit", "logic_functions.dcp", "utilization.rpt"])
     tester.run_tests()
 
 if __name__ == "__main__":
